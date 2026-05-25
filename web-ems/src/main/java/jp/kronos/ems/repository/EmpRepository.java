@@ -20,5 +20,7 @@ public interface EmpRepository {
 	 * @return 従業員ドメインのリスト
 	 */
 	List<Emp> findByDeptId(int deptId);
+	
+	Emp findById(int id);
 
 }
