@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>従業員詳細</title>
+	<style>
+		body {
+			font-family: sans-serif;
+			margin: 40px;
+		}
+
+		.container {
+			width: 98%;
+		}
+
+		.notice-area {
+			text-align: center;
+			color: #2c5d63;
+			font-weight: bold;
+			margin: 10px 0;
+			padding: 10px;
+		}
+
+		table {
+			border-collapse: collapse;
+			width: 100%;
+			margin-top: 20px;
+		}
+
+		th,
+		td {
+			border: 1px solid #ccc;
+			padding: 8px;
+			text-align: left;
+		}
+
+		th {
+			background-color: #f2f2f2;
+		}
+
+		.header-area {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.action-area {
+			margin-top: 20px;
+			text-align: right;
+		}
+
+		.btn-group {
+			display: flex;
+			gap: 5px;
+		}
+	</style>
+</head>
+
+<body>
+	<header class>
+		<div th:replace="~{common/header :: header}"></div>
+	</header>
+	<div class="container">
+		<h2>従業員詳細</h2>
+		<table th:object="${emp}">
+			<tr>
+				<th>社員番号</th>
+				<td th:text="${emp.enumber}"></td>
+			</tr>
+			<tr>
+				<th>氏名</th>
+				<td th:text="${emp.ename}"></td>
+			</tr>
+			<tr>
+				<th>入社日</th>
+				<td th:text="${emp.hireDate}"></td>
+			</tr>
+			<tr>
+				<th>部署</th>
+				<td th:text="${emp.deptId}"></td>
+			</tr>
+			<tr>
+				<th>電話番号</th>
+				<td th:text="${emp.telNumber}"></td>
+			</tr>
+			<tr>
+				<th>メールアドレス</th>
+				<td th:text="${emp.email}"></td>
+			</tr>
+			<tr>
+				<th>住所</th>
+				<td th:text="${emp.address}"></td>
+			</tr>
+		</table>
+		<a th:href="@{/employees/{id}(id=${emp.deptId})}">一覧に戻る</a>
+	</div>
+</body>
+
+</html>
