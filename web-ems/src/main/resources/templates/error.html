@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>システムエラー</title>
+	<style>
+		body {
+			font-family: sans-serif;
+			margin: 40px;
+			line-height: 1.6;
+		}
+
+		.error-box {
+			margin-top: 30px;
+			padding: 20px;
+			max-width: 600px;
+		}
+
+		h1 {
+			color: #d9534f;
+			margin-top: 0;
+		}
+
+		.info {
+			background-color: #f9f9f9;
+			padding: 10px;
+			font-size: 0.9rem;
+		}
+
+		.btn-link {
+			display: inline-block;
+			margin-top: 20px;
+		}
+	</style>
+</head>
+
+<body>
+	<header class>
+		<div th:replace="~{common/header :: header}"></div>
+	</header>
+	<div class="error-box">
+		<h1 th:text="'Error ' + ${status}"></h1>
+		<p>問題が発生しました。再度お試しいただくか管理者へご連絡ください。</p>
+
+		<div class="info">
+			<strong>詳細情報:</strong><br>
+			・Error: <span th:text="${error}"></span><br>
+			・Message: <span th:text="${message}"></span><br>
+			・Path: <span th:text="${path}"></span>
+		</div>
+
+		<a th:href="@{/login}" class="btn-link">ログイン画面へ戻る</a>
+	</div>
+
+</body>
+
+</html>

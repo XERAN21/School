@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>部署一覧</title>
+	<style>
+		body {
+			font-family: sans-serif;
+			margin: 40px;
+		}
+		
+		.container {
+			width: 98%;
+		}
+		.notice-area {
+		    text-align: center;
+		    color: #2c5d63;      
+		    font-weight: bold;
+		    margin: 10px 0;
+		    padding: 10px;
+		}
+		table {
+			border-collapse: collapse;
+			width: 100%;
+			margin-top: 20px;
+		}
+
+		th,
+		td {
+			border: 1px solid #ccc;
+			padding: 8px;
+			text-align: left;
+		}
+
+		th {
+			background-color: #f2f2f2;
+		}
+
+		.header-area {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.action-area {
+			margin-top: 20px;
+			text-align: right;
+		}
+
+		.btn-group {
+			display: flex;
+			gap: 5px;
+		}
+	</style>
+</head>
+
+<body>
+	<header class>
+		<div th:replace="~{common/header :: header}"></div>
+	</header>
+	<div class="container">
+
+		<h2>部署一覧</h2>
+		<div class="notice-area" th:if="${notice}" th:text="${notice}"></div>
+		<div class="action-area" th:if="${session.loginUser.adminFlg == 1}">
+			<a th:href="@{/depts/new}">部署登録</a>
+		</div>
+
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>部署名</th>
+					<th>詳細</th>
+					<th th:if="${session.loginUser.adminFlg == 1}">編集</th>
+					<th th:if="${session.loginUser.adminFlg == 1}">削除</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="dept : ${depts}">
+					<td th:text="${dept.id}">1</td>
+					<td><a th:href="@{/employees/{id}(id=${dept.id})}"><span th:text="${dept.dname}"></a></td>
+					<td>
+						<form th:action="@{/depts/{id}/detail(id=${dept.id})}" method="get">
+							<button type="submit">詳細</button>
+						</form>
+					</td>
+					<td th:if="${session.loginUser.adminFlg == 1}">
+						<form th:action="@{/depts/{id}/edit(id=${dept.id})}" method="get">
+							<button type="submit">編集</button>
+						</form>
+					</td>
+					<td th:if="${session.loginUser.adminFlg == 1}">
+						<form th:action="@{/depts/{id}/delete(id=${dept.id})}" method="post"
+							onsubmit="return confirm('本当に削除しますか？');">
+							<button type="submit">削除</button>
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+
+</html>

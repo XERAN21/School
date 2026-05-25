@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>部署詳細</title>
+	<style>
+		body {
+			font-family: sans-serif;
+			margin: 40px;
+			color: #333;
+		}
+
+		.detail-container {
+			width: 95%;
+		}
+
+
+		dl {
+			display: flex;
+			flex-wrap: wrap;
+			border-bottom: 1px solid #ddd;
+			padding: 10px 0;
+		}
+
+		dt {
+			width: 120px;
+			font-weight: bold;
+			color: #666;
+		}
+
+		.footer-links {
+			margin-top: 30px;
+		}
+	</style>
+</head>
+
+<body>
+	<header class>
+		<div th:replace="~{common/header :: header}"></div>
+	</header>
+	<div class="detail-container">
+		<h2>部署詳細</h2>
+
+		<dl>
+			<dt>ID</dt>
+			<dd th:text="${dept.id}">1</dd>
+		</dl>
+		<dl>
+			<dt>部署名</dt>
+			<dd th:text="${dept.dname}"></dd>
+		</dl>
+		<dl>
+			<dt>備考</dt>
+			<dd th:text="${dept.description}"></dd>
+		</dl>
+
+		<div class="footer-links">
+			<a th:href="@{/depts}" class="btn-back">部署一覧に戻る</a>
+		</div>
+	</div>
+
+</body>
+
+</html>

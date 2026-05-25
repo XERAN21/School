@@ -1,0 +1,35 @@
+<div th:fragment="header">
+    <style>
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1a374d; 
+            color: white;
+            padding: 5px 20px;
+			width: 95%;
+        }
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.9rem;
+        }
+        .header-right form {
+            margin: 0;
+        }
+    </style>
+
+    <div class="header-container">
+        <div class="header-left">
+            <strong th:text="従業員管理システム"></strong>
+        </div>
+
+        <div class="header-right" th:if="${session.loginUser != null}">
+            <span th:text="|${session.loginUser.name} でログイン中|"></span>
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="ログアウト">
+            </form>
+        </div>
+    </div>
+</div>
