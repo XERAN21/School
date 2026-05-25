@@ -33,4 +33,9 @@ public class DBEmpRepository implements EmpRepository {
 		return empMapper.findByDeptId(deptId);
 	}
 
+	@Override
+	public Emp findById(int id) {
+		return empMapper.findById(id);
+	}
+
 }

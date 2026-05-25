@@ -25,4 +25,5 @@ public interface EmpMapper {
      */
     List<Emp> findByDeptId(int deptId);
     
+    Emp findById(int id);
 }
