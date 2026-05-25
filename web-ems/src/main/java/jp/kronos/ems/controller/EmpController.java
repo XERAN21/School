@@ -44,7 +44,6 @@ public class EmpController {
 		return "emp/list";
 	}
 	
-	
 	@GetMapping("/{id}/detail")
 	public String showDetails(
 			@PathVariable int id,
