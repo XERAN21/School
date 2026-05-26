@@ -31,4 +31,9 @@ public class DBEmpDetailRepository implements EmpDetailRepository {
 	public void save(EmpDetail empDetail) {
 		empDetailMapper.save(empDetail);
 	}
+	
+	@Override
+	public void update(EmpDetail detail){
+		empDetailMapper.update(detail);
+	}
 }

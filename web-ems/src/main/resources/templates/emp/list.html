@@ -84,7 +84,7 @@
 					<td th:text="${emp.hireDate}"></td>
 					<td th:text="${emp.dname}"></td>
 					<td th:if="${session.loginUser.adminFlg == 1}">
-						<form method="get">
+						<form method="get" th:action="@{/employees/{id}/edit(id=${emp.id})}">
 							<button type="submit">編集</button>
 						</form>
 					</td>

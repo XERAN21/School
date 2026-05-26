@@ -26,4 +26,8 @@ public interface EmpRepository {
 	void save(Emp emp);
 	
 	int countByEnumber(String Enumber);
+	
+	void update(Emp emp);
+	
+    int countByEnumberExceptSelf(String enumber, int id);
 }

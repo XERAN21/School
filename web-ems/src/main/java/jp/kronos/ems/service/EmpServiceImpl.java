@@ -62,4 +62,33 @@ public class EmpServiceImpl implements EmpService {
 		
 	}
 
+	@Override
+	@Transactional
+	public void updateEmp(int id, EmpForm form) {
+		int count = empRepository.countByEnumberExceptSelf(form.getEnumber(), id);
+		
+		if (count>=1) {
+			throw new RuntimeException("この社員番号は既に他の従業員に使用されています。");
+		}else{
+			Emp emp = new Emp();
+			emp.setEnumber(form.getEnumber());
+			emp.setEname(form.getEname());
+			emp.setHireDate(form.getHireDate());
+			emp.setDeptId(Integer.parseInt(form.getDeptId()));
+			emp.setTelNumber(form.getTelNumber());
+			emp.setEmail(form.getEmail());
+			emp.setAddress(form.getAddress());
+			
+			empRepository.update(emp);
+			
+			EmpDetail detail = new EmpDetail();
+			detail.setEmpId(emp.getId());
+			detail.setTelNumber(emp.getTelNumber());
+			detail.setEmail(emp.getEmail());
+			detail.setAddress(emp.getAddress());
+			
+			empDetailRepository.update(detail);
+		}
+	}
+
 }

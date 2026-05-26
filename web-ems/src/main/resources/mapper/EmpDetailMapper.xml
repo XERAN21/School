@@ -28,7 +28,7 @@
 				#{address}
 			)
 	</insert>
-	<update id="save">
+	<update id="update">
 		update emp_detail(
 			set EMP_ID = #{empId}
 				TEL_NUMBER = #{telNumber}

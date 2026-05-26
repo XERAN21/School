@@ -74,4 +74,15 @@
 			#{deptId}
 		)
 	</insert>
+	<update id="update">
+		update EMP(
+			set ENUMBER = #{enumber}
+			ENAME = #{ename}
+			HIRE_DATE = #{hireDate}
+			DEPT_ID = #{deptId}
+		)
+	</update>
+	<select id="countByEnumberExceptSelf">
+		
+	</select>
 </mapper>

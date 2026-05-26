@@ -16,4 +16,7 @@ public interface EmpDetailMapper {
     public void deleteByEmpId(int empId);
     
     void save(EmpDetail emp);
+    
+    void update(EmpDetail detail);
+    
 }
