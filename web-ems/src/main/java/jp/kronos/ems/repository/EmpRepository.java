@@ -22,5 +22,8 @@ public interface EmpRepository {
 	List<Emp> findByDeptId(int deptId);
 	
 	Emp findById(int id);
-
+	
+	void save(Emp emp);
+	
+	int countByEnumber(String Enumber);
 }

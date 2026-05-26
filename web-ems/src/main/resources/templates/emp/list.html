@@ -65,7 +65,7 @@
 		<h2>従業員一覧</h2>
 		<div class="notice-area" th:if="${notice}" th:text="${notice}"></div>
 		<div class="action-area" th:if="${session.loginUser.adminFlg == 1}">
-			<a th:href="@{/emps/new}">従業員登録</a>
+			<a th:href="@{/employees/{deptId}/new(deptId=${deptId})}">従業員登録</a>
 		</div>
 
 		<table th:if="${not #lists.isEmpty(emps)}">

@@ -6,22 +6,35 @@ import jakarta.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import jp.kronos.ems.domain.Dept;
 import jp.kronos.ems.domain.Emp;
 import jp.kronos.ems.domain.User;
+import jp.kronos.ems.form.EmpForm;
+import jp.kronos.ems.service.DeptService;
 import jp.kronos.ems.service.EmpService;
+import jp.kronos.ems.service.UtilService;
 
 @Controller
 @RequestMapping("/employees")
 public class EmpController {
 	
+	private final UtilService utilService;
 	private final EmpService empService;
+	private final DeptService deptService;
 
-	public EmpController(EmpService service) {
+	public EmpController(EmpService service, UtilService utilServiceImpl, DeptService deptService) {
 		this.empService = service;
+		this.utilService = utilServiceImpl;
+		this.deptService = deptService;
 	}
 	
 	@GetMapping("{deptId}")
@@ -44,7 +57,6 @@ public class EmpController {
 		return "emp/list";
 	}
 	
-	
 	@GetMapping("/{id}/detail")
 	public String showDetails(
 			@PathVariable int id,
@@ -61,5 +73,62 @@ public class EmpController {
 		model.addAttribute("emp",emp);
 		
 		return "emp/detail";
+	}
+	
+	@GetMapping("{deptId}/new")
+	public String showNew(
+			@ModelAttribute EmpForm empForm,
+			HttpSession session,
+			@PathVariable int deptId,
+			Model model) {
+		
+		User user = (User) session.getAttribute("loginUser");
+		if (user == null) {
+			return "redirect:/login";
+		}
+		
+		utilService.adminCheck(user);
+		
+		List<Dept> depts = deptService.getDepts();
+		model.addAttribute("depts", depts);
+		model.addAttribute("deptId", deptId);
+		model.addAttribute("empForm", empForm);
+		
+		return "emp/new";
+	}
+	
+	@PostMapping("{deptId}/new")
+	public String create(
+			@PathVariable int deptId,
+			@Validated @ModelAttribute EmpForm empForm,
+			BindingResult br,
+			HttpSession session,
+			Model model,
+			RedirectAttributes ra) {
+			
+		User user = (User) session.getAttribute("loginUser");
+		if (user == null) {
+			return "redirect:/login";
+		}
+		
+		utilService.adminCheck(user);
+		List<Dept> depts = deptService.getDepts();
+		
+		if (br.hasErrors()) {
+			model.addAttribute("depts", depts);
+			return "emp/new";
+		}
+		
+		try {
+			empService.saveEmp(empForm);
+		} catch (RuntimeException e) {
+			model.addAttribute("error",e.getMessage());
+			model.addAttribute("depts",depts);
+			return "emp/new";
+		}
+		
+		ra.addFlashAttribute("notice", "「従業員を登録しました。」");
+		
+		return "redirect:/employees/{deptId}";
 	}
 }

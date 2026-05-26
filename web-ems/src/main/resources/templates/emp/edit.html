@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>従業員更新</title>
+	<style>
+		body {
+			font-family: sans-serif;
+			margin: 40px;
+		}
+
+		.form-container {
+			width: 400px;
+		}
+
+		.form-group {
+			margin-bottom: 15px;
+		}
+
+		label {
+			display: block;
+			font-size: 0.9rem;
+			margin-bottom: 5px;
+		}
+
+		input,
+		textarea {
+			width: 100%;
+			padding: 8px;
+			box-sizing: border-box;
+		}
+
+		select {
+			width: 100%;
+			padding: 8px;
+			box-sizing: border-box;
+		}
+
+		.btn-area {
+			margin-top: 20px;
+			display: flex;
+			gap: 10px;
+		}
+
+		.error {
+			color: red;
+			font-size: 0.8rem;
+		}
+
+		.id-field {
+			background-color: #eee;
+		}
+	</style>
+</head>
+
+<body>
+	<header class>
+		<div th:replace="~{common/header :: header}"></div>
+	</header>
+	<div class="container">
+		<div class="notice-area" th:if="${error}" th:text="${error}"></div>
+		<h2>従業員更新</h2>
+		<form th:action="@{/employees/{deptId}/edit(deptId=${deptId})}" method="post" th:object="${empForm}">
+			<div class="form-group">
+				<label>社員番号</label>
+				<input type="text" th:field="*{enumber}">
+				<div class="error" th:if="${#fields.hasErrors('enumber')}" th:errors="*{enumber}"></div>
+			</div>
+			<div class="form-group">
+				<label>氏名</label>
+				<input type="text" th:field="*{ename}">
+				<div class="error" th:if="${#fields.hasErrors('ename')}" th:errors="*{ename}"></div>
+			</div>
+			<div class="form-group">
+				<label>入社日</label>
+				<input type="date" th:field="*{hireDate}">
+				<div class="error" th:if="${#fields.hasErrors('hireDate')}" th:errors="*{hireDate}"></div>
+			</div>
+			<div class="form-group">
+				<label>部署</label>
+				<select th:field="*{deptId}">
+					<option value="">--選択してください--</option>
+					<option th:each="dept :${depts}" th:value="${dept.id}" th:text="${dept.dname}"></option>
+				</select>
+				<div class="error" th:if="${#fields.hasErrors('deptId')}" th:errors="*{deptId}"></div>
+
+			</div>
+			<div class="form-group">
+				<label>電話番号</label>
+				<input type="tel" th:field="*{telNumber}">
+				<div class="error" th:if="${telNumber == '00000000000'}" th:errors="*{telNumber}"></div>
+				<div class="error" th:if="${#fields.hasErrors('telNumber')}" th:errors="*{telNumber}"></div>
+			</div>
+			<div class="form-group">
+				<label>メールアドレス</label>
+				<input type="email" th:field="*{email}">
+				<div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+			</div>
+			<div class="form-group">
+				<label>住所</label>
+				<input type="text" th:field="*{address}">
+				<div class="error" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></div>
+			</div>
+			<div class="btn-area">
+				<button type="submit">更新</button>
+				<a th:href="@{/employees/{deptId}(deptId=${deptId})}">キャンセル</a>
+			</div>
+		</form>
+
+	</div>
+</body>
+
+</html><html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html>
