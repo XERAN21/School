@@ -47,6 +47,17 @@ public class DBEmpRepository implements EmpRepository {
 	public int countByEnumber(String Enumber) {
 		return empMapper.countByEnumber(Enumber);
 	}
+
+	@Override
+	public void update(Emp emp) {
+		empMapper.update(emp);
+		
+	}
+
+	@Override
+	public int countByEnumberExceptSelf(String enumber, int id) {
+		return empMapper.countByEnumberExceptSelf(enumber, id);
+	}
 	
 	
 

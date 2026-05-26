@@ -14,4 +14,6 @@ public interface EmpDetailRepository {
 	void deleteByEmpId(int empId);
 	
 	void save(EmpDetail empDetail) ;
+	
+	void update(EmpDetail detail);
 }

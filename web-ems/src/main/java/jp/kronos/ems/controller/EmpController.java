@@ -26,7 +26,7 @@ import jp.kronos.ems.service.UtilService;
 @Controller
 @RequestMapping("/employees")
 public class EmpController {
-	
+
 	private final UtilService utilService;
 	private final EmpService empService;
 	private final DeptService deptService;
@@ -36,67 +36,66 @@ public class EmpController {
 		this.utilService = utilServiceImpl;
 		this.deptService = deptService;
 	}
-	
+
 	@GetMapping("{deptId}")
 	public String showEmpList(
 			@PathVariable int deptId,
 			Model model,
 			HttpSession session) {
-		
+
 		User user = (User) session.getAttribute("loginUser");
 		if (user == null) {
 			return "redirect:/login";
 		}
-		
-		
+
 		List<Emp> emps = empService.getEmpsByDeptId(deptId);
-		
+
 		model.addAttribute("emps", emps);
 		model.addAttribute("deptId", deptId);
-		
+
 		return "emp/list";
 	}
-	
+
 	@GetMapping("/{id}/detail")
 	public String showDetails(
 			@PathVariable int id,
 			HttpSession session,
 			Model model) {
-		
+
 		User user = (User) session.getAttribute("loginUser");
 		if (user == null) {
 			return "redirect:/login";
 		}
-		
+
 		Emp emp = empService.getEmp(id);
-		
-		model.addAttribute("emp",emp);
-		
+
+		model.addAttribute("emp", emp);
+
 		return "emp/detail";
 	}
-	
+
 	@GetMapping("{deptId}/new")
 	public String showNew(
 			@ModelAttribute EmpForm empForm,
 			HttpSession session,
 			@PathVariable int deptId,
 			Model model) {
-		
+
 		User user = (User) session.getAttribute("loginUser");
 		if (user == null) {
 			return "redirect:/login";
 		}
-		
+
 		utilService.adminCheck(user);
-		
+
 		List<Dept> depts = deptService.getDepts();
 		model.addAttribute("depts", depts);
 		model.addAttribute("deptId", deptId);
 		model.addAttribute("empForm", empForm);
-		
+
 		return "emp/new";
 	}
-	
+
 	@PostMapping("{deptId}/new")
 	public String create(
 			@PathVariable int deptId,
@@ -105,29 +104,98 @@ public class EmpController {
 			HttpSession session,
 			Model model,
 			RedirectAttributes ra) {
-			
+
+		User user = (User) session.getAttribute("loginUser");
+		if (user == null) {
+			return "redirect:/login";
+		}
+
+		utilService.adminCheck(user);
+		List<Dept> depts = deptService.getDepts();
+
+		if (br.hasErrors()) {
+			model.addAttribute("depts", depts);
+			return "emp/new";
+		}
+
+		try {
+			empService.saveEmp(empForm);
+		} catch (RuntimeException e) {
+			model.addAttribute("error", e.getMessage());
+			model.addAttribute("depts", depts);
+			return "emp/new";
+		}
+
+		ra.addFlashAttribute("notice", "「従業員を登録しました。」");
+
+		return "redirect:/employees/{deptId}";
+	}
+
+	@GetMapping("/{id}/edit")
+	public String showEdit(
+			@ModelAttribute EmpForm empForm,
+			HttpSession session,
+			@PathVariable int id,
+			Model model) {
+
 		User user = (User) session.getAttribute("loginUser");
 		if (user == null) {
 			return "redirect:/login";
 		}
 		
 		utilService.adminCheck(user);
+		
+		Emp  emp = empService.getEmp(id);
+		empForm.setEnumber(emp.getEnumber());
+		empForm.setEname(emp.getEname());
+		empForm.setHireDate(emp.getHireDate());
+		empForm.setDeptId(emp.getDeptId()+"");
+		empForm.setTelNumber(emp.getTelNumber());
+		empForm.setEmail(emp.getEmail());
+		empForm.setAddress(emp.getAddress());
+		
+		List<Dept> depts = deptService.getDepts();
+		
+		model.addAttribute("depts", depts);
+		model.addAttribute("empForm", empForm);
+		model.addAttribute("deptId", emp.getDeptId());
+		model.addAttribute("id", id);
+		
+		return "emp/edit";
+	}
+	
+	@PostMapping("/{id}/edit")
+	public String update(
+			@Validated @ModelAttribute EmpForm form,
+			BindingResult br,
+			@PathVariable int id,
+			HttpSession session,
+			Model model,
+			RedirectAttributes ra) {
+		
+		User user = (User) session.getAttribute("loginUser");
+		if (user == null) {
+			return "redirect:/login";
+		}
+
+		utilService.adminCheck(user);
+		
 		List<Dept> depts = deptService.getDepts();
 		
 		if (br.hasErrors()) {
 			model.addAttribute("depts", depts);
-			return "emp/new";
+			return "emp/edit";
 		}
 		
 		try {
-			empService.saveEmp(empForm);
+			empService.updateEmp(id, form);
 		} catch (RuntimeException e) {
-			model.addAttribute("error",e.getMessage());
+			model.addAttribute("error", e.getMessage() );
 			model.addAttribute("depts",depts);
-			return "emp/new";
+			return "emp/edit";
 		}
 		
-		ra.addFlashAttribute("notice", "「従業員を登録しました。」");
+		ra.addFlashAttribute("notice", "「従業員情報を更新しました。」");
 		
 		return "redirect:/employees/{deptId}";
 	}

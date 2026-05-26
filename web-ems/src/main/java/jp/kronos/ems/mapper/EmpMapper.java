@@ -30,4 +30,8 @@ public interface EmpMapper {
     void save(Emp emp);
     
     int countByEnumber(String enumber);
+    
+    void update(Emp emp); 
+    
+    int countByEnumberExceptSelf(String enumber, int id);
 }

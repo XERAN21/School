@@ -9,4 +9,5 @@ public interface EmpService {
 	List<Emp> getEmpsByDeptId(int deptId);
 	Emp getEmp(int id);
 	void saveEmp(EmpForm form);
+	void updateEmp(int id,EmpForm form);
 }
