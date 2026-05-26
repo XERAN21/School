@@ -2,6 +2,7 @@ package jp.kronos.ems.repository;
 
 import org.springframework.stereotype.Repository;
 
+import jp.kronos.ems.domain.EmpDetail;
 import jp.kronos.ems.mapper.EmpDetailMapper;
 
 /**
@@ -24,5 +25,10 @@ public class DBEmpDetailRepository implements EmpDetailRepository {
 	@Override
 	public void deleteByEmpId(int empId) {
 		empDetailMapper.deleteByEmpId(empId);
+	}
+
+	@Override
+	public void save(EmpDetail empDetail) {
+		empDetailMapper.save(empDetail);
 	}
 }

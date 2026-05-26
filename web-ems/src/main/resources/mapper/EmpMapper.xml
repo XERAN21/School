@@ -3,98 +3,75 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jp.kronos.ems.mapper.EmpMapper">
 	<resultMap id="Emp" type="jp.kronos.ems.domain.Emp">
-        <id property="id" column="ID" />
-        <result property="enumber" column="ENUMBER" />
-        <result property="ename" column="ENAME" />
-        <result property="hireDate" column="HIRE_DATE" />
-        <result property="deptId" column="DEPT_ID" />
-        <result property="dname" column="DNAME" />
-        <result property="telNumber" column="TEL_NUMBER" />
-        <result property="ename" column="ENAME" />
-         <result property="address" column="ADDRESS" />
-         <result property="email" column="EMAIL" />
-    </resultMap>
-    <delete id="deleteByDeptId">
-        delete from
-          EMP
-        where
-          DEPT_ID = #{deptId}
-    </delete>
-    <select id="findByDeptId" resultMap="Emp">
-	    select 
-	      e.ID, 
-	      e.ENUMBER, 
-	      e.ENAME, 
-	      e.HIRE_DATE, 
-	      e.DEPT_ID, 
-	      d.DNAME
-	    from 
-	      EMP e
-	    join 
-	      DEPT d on e.DEPT_ID = d.ID
-	    where 
-	      e.DEPT_ID = #{deptId}
-	    order by 
-	      e.ENUMBER asc
+		<id property="id" column="ID" />
+		<result property="enumber" column="ENUMBER" />
+		<result property="ename" column="ENAME" />
+		<result property="hireDate" column="HIRE_DATE" />
+		<result property="deptId" column="DEPT_ID" />
+		<result property="dname" column="DNAME" />
+		<result property="telNumber" column="TEL_NUMBER" />
+		<result property="ename" column="ENAME" />
+		<result property="address" column="ADDRESS" />
+		<result property="email" column="EMAIL" />
+	</resultMap>
+	<delete id="deleteByDeptId">
+		delete from
+		EMP
+		where
+		DEPT_ID = #{deptId}
+	</delete>
+	<select id="findByDeptId" resultMap="Emp">
+		select
+		e.ID,
+		e.ENUMBER,
+		e.ENAME,
+		e.HIRE_DATE,
+		e.DEPT_ID,
+		d.DNAME
+		from
+		EMP e
+		join
+		DEPT d on e.DEPT_ID = d.ID
+		where
+		e.DEPT_ID = #{deptId}
+		order by
+		e.ENUMBER asc
+	</select>
+	<select id="countByEnumber" resultType="int">
+		select
+		COUNT(*)
+		from
+		EMP
+		where
+		ENUMBER = #{enumber}
 	</select>
 	<select id="findById" resultMap="Emp">
-    select 
-        e.ID, 
-        e.ENUMBER, 
-        e.ENAME, 
-        e.HIRE_DATE, 
-        e.DEPT_ID, 
-        d.DNAME,
-        ed.TEL_NUMBER,
-        ed.EMAIL,
-        ed.ADDRESS
-    from 
-        EMP e
-    inner join 
-        DEPT d ON e.DEPT_ID = d.ID
-    inner join 
-        EMP_DETAIL ed ON e.ID = ed.EMP_ID
-    where
-        e.ID = #{id}
-</select>
-<insert id="save" useGeneratedKeys="true" keyProperty="id">
-    insert into
-       EMP (ENUMBER, ENAME, HIRE_DATE, DEPT_ID)
-    values
-       (#{enumber}, #{ename}, #{hireDate}, #{deptId})
-</insert>
-<select id="countByEnumber" resultType="int">
-    select 
-      COUNT(*) 
-    from 
-      EMP 
-    where 
-      ENUMBER = #{enumber}
-</select>
-
-<update id="update">
-    update 
-      EMP
-     set
-        ENUMBER = #{enumber},
-        ENAME = #{ename},
-        HIRE_DATE = #{hireDate},
-        DEPT_ID = #{deptId}
-    where ID = #{id}
-</update>
-
-<select id="countByEnumberExceptSelf" resultType="int">
-    select
-       COUNT(*)
-    from
-       EMP 
-    where
-       ENUMBER = #{enumber} and ID != #{id}
-</select>
-<delete id="delete">
-    delete from
-      EMP
-   where
-     ID = #{id}
-</delete>
+		select
+			e.ENUMBER,
+			e.ENAME,
+			e.HIRE_DATE,
+			e.DEPT_ID,
+			ed.TEL_NUMBER,
+			ed.EMAIL,
+			ed.ADDRESS
+		from
+		EMP e
+		inner join emp_detail ed on e.ID = ed.EMP_ID
+		where
+		e.ID = #{id}
+	</select>
+	<insert id="save" useGeneratedKeys="true" keyProperty="id">
+		insert into
+			EMP(
+			ENUMBER,
+			ENAME,
+			HIRE_DATE,
+			DEPT_ID
+		) VALUES (
+			#{enumber},
+			#{ename},
+			#{hireDate},
+			#{deptId}
+		)
+	</insert>
 </mapper>

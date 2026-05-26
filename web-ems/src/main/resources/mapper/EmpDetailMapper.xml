@@ -2,10 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jp.kronos.ems.mapper.EmpDetailMapper">
-	 <delete id="deleteByEmpId">
+	<resultMap type="jp.kronos.ems.domain.EmpDetail" id="EmpDetail">
+		<id property="id" column="ID"/>
+		<result property="empId" column="EMP_ID"/>
+		<result property="telNumber" column="TEL_NUMBER"/>
+		<result property="email" column="EMAIL"/>
+		<result property="address" column="ADDRESS"/>
+	</resultMap>
+	<delete id="deleteByEmpId">
         delete from
            EMP_DETAIL 
         where EMP_ID = #{empId}
 	</delete>
-
+	<insert id="save" useGeneratedKeys="true" keyProperty="id">
+		insert into
+			emp_detail(
+				EMP_ID,
+				TEL_NUMBER,
+				EMAIL,
+				ADDRESS
+			) values (
+				#{empId},
+				#{telNumber},
+				#{email},
+				#{address}
+			)
+	</insert>
+	<update id="save">
+		update emp_detail(
+			set EMP_ID = #{empId}
+				TEL_NUMBER = #{telNumber}
+				EMAIL = #{email}
+				ADDRESS = #{address}
+			where
+				ID = #{id}
+		)
+	</update>
 </mapper>

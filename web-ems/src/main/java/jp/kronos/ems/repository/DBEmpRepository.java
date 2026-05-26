@@ -38,4 +38,16 @@ public class DBEmpRepository implements EmpRepository {
 		return empMapper.findById(id);
 	}
 
+	@Override
+	public void save(Emp emp) {
+		empMapper.save(emp);
+	}
+
+	@Override
+	public int countByEnumber(String Enumber) {
+		return empMapper.countByEnumber(Enumber);
+	}
+	
+	
+
 }
