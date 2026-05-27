@@ -30,4 +30,6 @@ public interface EmpRepository {
 	void update(Emp emp);
 	
     int countByEnumberExceptSelf(String enumber, int id);
+
+    void delete(int id);
 }

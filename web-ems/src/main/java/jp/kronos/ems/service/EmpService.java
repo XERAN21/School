@@ -10,4 +10,5 @@ public interface EmpService {
 	Emp getEmp(int id);
 	void saveEmp(EmpForm form);
 	void updateEmp(int id,EmpForm form);
+	void deleteEmp(int id);
 }

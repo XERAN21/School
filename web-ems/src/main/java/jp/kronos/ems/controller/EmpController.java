@@ -149,7 +149,7 @@ public class EmpController {
 		empForm.setEnumber(emp.getEnumber());
 		empForm.setEname(emp.getEname());
 		empForm.setHireDate(emp.getHireDate());
-		empForm.setDeptId(emp.getDeptId()+"");
+		empForm.setDeptId(emp.getDeptId());
 		empForm.setTelNumber(emp.getTelNumber());
 		empForm.setEmail(emp.getEmail());
 		empForm.setAddress(emp.getAddress());
@@ -196,6 +196,32 @@ public class EmpController {
 		}
 		
 		ra.addFlashAttribute("notice", "「従業員情報を更新しました。」");
+		ra.addAttribute("deptId", form.getDeptId());
+		 
+		return "redirect:/employees/{deptId}";
+	}
+	
+	@PostMapping("/{id}/delete")
+	public String delete(
+			@PathVariable int id,
+			HttpSession session,
+			RedirectAttributes ra
+			) {
+		
+		User user = (User) session.getAttribute("loginUser");
+		if (user == null) {
+			return "redirect:/login";
+		}
+
+		utilService.adminCheck(user);
+		
+		Emp emp = empService.getEmp(id);
+		int deptId = emp.getDeptId();
+		
+		empService.deleteEmp(id);
+		
+		ra.addFlashAttribute("notice", "「従業員を削除しました。」");
+		ra.addAttribute("deptId", deptId);
 		
 		return "redirect:/employees/{deptId}";
 	}

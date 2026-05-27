@@ -89,7 +89,7 @@
 						</form>
 					</td>
 					<td th:if="${session.loginUser.adminFlg == 1}">
-						<form method="post" onsubmit="return confirm('本当に削除しますか？');">
+						<form method="post" th:action="@{/employees/{id}/delete(id=${emp.id})}" onsubmit="return confirm('本当に削除しますか？');">
 							<button type="submit">削除</button>
 						</form>
 					</td>
