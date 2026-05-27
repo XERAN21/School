@@ -23,6 +23,9 @@ import jp.kronos.ems.service.DeptService;
 import jp.kronos.ems.service.EmpService;
 import jp.kronos.ems.service.UtilService;
 
+/**
+ * 従業員管理に関するリクエストを制御するコントローラークラスです。
+ */
 @Controller
 @RequestMapping("/employees")
 public class EmpController {
@@ -31,12 +34,25 @@ public class EmpController {
 	private final EmpService empService;
 	private final DeptService deptService;
 
-	public EmpController(EmpService service, UtilService utilServiceImpl, DeptService deptService) {
-		this.empService = service;
-		this.utilService = utilServiceImpl;
+	/**
+	 * コンストラクタ。
+	 * @param empService 従業員サービス
+	 * @param utilService 共通ユーティリティサービス
+	 * @param deptService 部署サービス
+	 */
+	public EmpController(EmpService empService, UtilService utilService, DeptService deptService) {
+		this.empService = empService;
+		this.utilService = utilService;
 		this.deptService = deptService;
 	}
 
+	/**
+	 * 指定された部署に所属する従業員一覧画面を表示します。
+	 * @param deptId 表示対象の部署ID
+	 * @param model 画面へ渡すデータを保持するModelオブジェクト
+	 * @param session 現在のユーザーセッション
+	 * @return 従業員一覧画面のパス、またはログイン画面へのリダイレクト
+	 */
 	@GetMapping("{deptId}")
 	public String showEmpList(
 			@PathVariable int deptId,
@@ -56,6 +72,13 @@ public class EmpController {
 		return "emp/list";
 	}
 
+	/**
+	 * 従業員詳細画面を表示します。
+	 * @param id 表示対象の従業員ID
+	 * @param session 現在のユーザーセッション
+	 * @param model 画面へ渡すデータを保持するModelオブジェクト
+	 * @return 従業員詳細画面のパス、またはログイン画面へのリダイレクト
+	 */
 	@GetMapping("/{id}/detail")
 	public String showDetails(
 			@PathVariable int id,
@@ -74,6 +97,14 @@ public class EmpController {
 		return "emp/detail";
 	}
 
+	/**
+	 * 従業員登録画面を表示します。
+	 * @param empForm 登録用フォームオブジェクト
+	 * @param session 現在のユーザーセッション
+	 * @param deptId 所属部署ID
+	 * @param model 画面へ渡すデータを保持するModelオブジェクト
+	 * @return 従業員登録画面のパス、またはログイン画面へのリダイレクト
+	 */
 	@GetMapping("{deptId}/new")
 	public String showNew(
 			@ModelAttribute EmpForm empForm,
@@ -96,6 +127,16 @@ public class EmpController {
 		return "emp/new";
 	}
 
+	/**
+	 * 従業員の登録を実行します。
+	 * @param deptId 所属部署ID
+	 * @param empForm 入力された従業員登録用フォーム
+	 * @param br 入力チェック結果
+	 * @param session 現在のユーザーセッション
+	 * @param model 画面へ渡すデータを保持するModelオブジェクト
+	 * @param ra リダイレクト先へデータを渡すRedirectAttributes
+	 * @return 従業員一覧へのリダイレクト、または入力エラー時の登録画面のパス
+	 */
 	@PostMapping("{deptId}/new")
 	public String create(
 			@PathVariable int deptId,
@@ -131,6 +172,14 @@ public class EmpController {
 		return "redirect:/employees/{deptId}";
 	}
 
+	/**
+	 * 従業員編集画面を表示します。
+	 * @param empForm 編集用フォームオブジェクト
+	 * @param session 現在のユーザーセッション
+	 * @param id 編集対象の従業員ID
+	 * @param model 画面へ渡すデータを保持するModelオブジェクト
+	 * @return 従業員編集画面のパス、またはログイン画面へのリダイレクト
+	 */
 	@GetMapping("/{id}/edit")
 	public String showEdit(
 			@ModelAttribute EmpForm empForm,
@@ -142,10 +191,10 @@ public class EmpController {
 		if (user == null) {
 			return "redirect:/login";
 		}
-		
+
 		utilService.adminCheck(user);
-		
-		Emp  emp = empService.getEmp(id);
+
+		Emp emp = empService.getEmp(id);
 		empForm.setEnumber(emp.getEnumber());
 		empForm.setEname(emp.getEname());
 		empForm.setHireDate(emp.getHireDate());
@@ -153,17 +202,27 @@ public class EmpController {
 		empForm.setTelNumber(emp.getTelNumber());
 		empForm.setEmail(emp.getEmail());
 		empForm.setAddress(emp.getAddress());
-		
+
 		List<Dept> depts = deptService.getDepts();
-		
+
 		model.addAttribute("depts", depts);
 		model.addAttribute("empForm", empForm);
 		model.addAttribute("deptId", emp.getDeptId());
 		model.addAttribute("id", id);
-		
+
 		return "emp/edit";
 	}
-	
+
+	/**
+	 * 従業員の更新を実行します。
+	 * @param form 入力された従業員編集用フォーム
+	 * @param br 入力チェック結果
+	 * @param id 更新対象の従業員ID
+	 * @param session 現在のユーザーセッション
+	 * @param model 画面へ渡すデータを保持するModelオブジェクト
+	 * @param ra リダイレクト先へデータを渡すRedirectAttributes
+	 * @return 従業員一覧へのリダイレクト、または入力エラー時の更新画面のパス
+	 */
 	@PostMapping("/{id}/edit")
 	public String update(
 			@Validated @ModelAttribute EmpForm form,
@@ -172,56 +231,62 @@ public class EmpController {
 			HttpSession session,
 			Model model,
 			RedirectAttributes ra) {
-		
+
 		User user = (User) session.getAttribute("loginUser");
 		if (user == null) {
 			return "redirect:/login";
 		}
 
 		utilService.adminCheck(user);
-		
+
 		List<Dept> depts = deptService.getDepts();
-		
+
 		if (br.hasErrors()) {
 			model.addAttribute("depts", depts);
 			return "emp/edit";
 		}
-		
+
 		try {
 			empService.updateEmp(id, form);
 		} catch (RuntimeException e) {
-			model.addAttribute("error", e.getMessage() );
-			model.addAttribute("depts",depts);
+			model.addAttribute("error", e.getMessage());
+			model.addAttribute("depts", depts);
 			return "emp/edit";
 		}
-		
+
 		ra.addFlashAttribute("notice", "「従業員情報を更新しました。」");
-		 
+
 		return "redirect:/employees/" + form.getDeptId();
 	}
-	
+
+	/**
+	 * 指定されたIDの従業員を削除します。
+	 * @param id 削除対象の従業員ID
+	 * @param session 現在のユーザーセッション
+	 * @param ra リダイレクト先へデータを渡すRedirectAttributes
+	 * @return 従業員一覧画面へのリダイレクト
+	 */
 	@PostMapping("/{id}/delete")
 	public String delete(
 			@PathVariable int id,
 			HttpSession session,
-			RedirectAttributes ra
-			) {
-		
+			RedirectAttributes ra) {
+
 		User user = (User) session.getAttribute("loginUser");
 		if (user == null) {
 			return "redirect:/login";
 		}
 
 		utilService.adminCheck(user);
-		
+
 		Emp emp = empService.getEmp(id);
 		int deptId = emp.getDeptId();
-		
+
 		empService.deleteEmp(id);
-		
+
 		ra.addFlashAttribute("notice", "「従業員を削除しました。」");
 		ra.addAttribute("deptId", deptId);
-		
+
 		return "redirect:/employees/{deptId}";
 	}
 }
