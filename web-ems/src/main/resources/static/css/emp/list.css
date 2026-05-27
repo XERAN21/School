@@ -1,0 +1,162 @@
+body {
+	font-family: sans-serif;
+	margin: 40px;
+	background-color: var(--darkest-color);
+}
+
+.container {
+	width: 98%;
+	max-width: 1400px;
+	margin: 0 auto;
+	background: var(--dark-color);
+	border-radius: 12px;
+	padding: 20px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.notice-area {
+	text-align: center;
+	color: var(--dark-color);
+	font-weight: bold;
+	margin: 10px 0;
+	padding: 10px;
+	background-color: var(--light-color);
+	border-radius: 6px;
+}
+
+h2 {
+	color: var(--lightest-color);
+	border-bottom: 3px solid var(--brand-color);
+	padding-bottom: 10px;
+	margin-bottom: 20px;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+	margin-top: 20px;
+	background-color: var(--lightest-color);
+	border-radius: 12px;
+}
+
+th,
+td {
+	border: 1px solid var(--mid-color);
+	padding: 12px 8px;
+	text-align: left;
+}
+
+th {
+	background-color: var(--darkest-color);
+	color: var(--lightest-color);
+	font-weight: 600;
+}
+
+tr:hover {
+	background-color: var(--light-color);
+}
+
+.action-area {
+	margin-top: 20px;
+	text-align: right;
+}
+
+.action-area a {
+	background-color: var(--brand-color);
+	color: var(--darkest-color);
+	padding: 10px 20px;
+	text-decoration: none;
+	border-radius: 6px;
+	font-weight: bold;
+	transition: all 0.3s ease;
+	display: inline-block;
+}
+
+.action-area a:hover {
+	background-color: var(--darkest-color);
+	color: var(--lightest-color);
+}
+
+button {
+	background-color: var(--dark-color);
+	color: var(--lightest-color);
+	border: none;
+	padding: 6px 12px;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 12px;
+	transition: all 0.3s ease;
+}
+
+button:hover {
+	background-color: var(--darkest-color);
+	transform: translateY(-1px);
+}
+
+/* 編集ボタン */
+form[method="get"] button {
+	background-color: var(--brand-color);
+	color: var(--darkest-color);
+}
+
+form[method="get"] button:hover {
+	background-color: var(--darkest-color);
+	color: var(--lightest-color);
+}
+
+/* 削除ボタン */
+form[method="post"] button {
+	background-color: #dc3545;
+}
+
+form[method="post"] button:hover {
+	background-color: #bb2d3b;
+}
+
+a {
+	color: var(--dark-color);
+	text-decoration: none;
+}
+
+a:hover {
+	color: var(--brand-color);
+	text-decoration: underline;
+}
+
+.error {
+	text-align: center;
+	color: #dc3545;
+	padding: 20px;
+	background-color: #f8d7da;
+	border-radius: 6px;
+	margin-top: 20px;
+}
+
+/* 部署一覧リンク */
+.container > a {
+	display: inline-block;
+	margin-top: 20px;
+	color: var(--brand-color);
+	font-weight: bold;
+}
+
+.container > a:hover {
+	color: var(--darkest-color);
+}
+
+@media (max-width: 768px) {
+	body {
+		margin: 20px;
+	}
+
+	th,
+	td {
+		padding: 6px 4px;
+		font-size: 12px;
+	}
+
+	button {
+		padding: 4px 8px;
+		font-size: 10px;
+	}
+}

@@ -80,16 +80,17 @@
 		UPDATE EMP
 		SET
 		ENUMBER = #{enumber},
-		ENAME = #{ename},
+		ENAME = #{ename}, 
 		HIRE_DATE = #{hireDate},
 		DEPT_ID = #{deptId}
 		WHERE ID = #{id}
 	</update>
 	<select id="countByEnumberExceptSelf" resultType="int">
 		select count(*)
-		from emp
+			from
+			emp
 		where ENUMBER = #{enumber}
-		and ID = #{id}
+		and ID != #{id}
 	</select>
 	<delete id="delete">
 		delete from
