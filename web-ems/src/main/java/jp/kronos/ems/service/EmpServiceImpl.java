@@ -37,14 +37,14 @@ public class EmpServiceImpl implements EmpService {
 	public void saveEmp(EmpForm form) {
 	 int count = empRepository.countByEnumber(form.getEnumber());
 		
-	 if (count >= 1) {
+	 if (count > 1) {
 		throw new RuntimeException("この社員番号は既に登録されてます。");
 	}else {
 		Emp emp = new Emp();
 		emp.setEnumber(form.getEnumber());
 		emp.setEname(form.getEname());
 		emp.setHireDate(form.getHireDate());
-		emp.setDeptId(Integer.parseInt(form.getDeptId()));
+		emp.setDeptId(form.getDeptId());
 		emp.setTelNumber(form.getTelNumber());
 		emp.setEmail(form.getEmail());
 		emp.setAddress(form.getAddress());
@@ -58,6 +58,7 @@ public class EmpServiceImpl implements EmpService {
 		detail.setAddress(emp.getAddress());
 		
 		empDetailRepository.save(detail);
+
 	}
 		
 	}
@@ -67,14 +68,15 @@ public class EmpServiceImpl implements EmpService {
 	public void updateEmp(int id, EmpForm form) {
 		int count = empRepository.countByEnumberExceptSelf(form.getEnumber(), id);
 		
-		if (count>=1) {
+		if (count>1) {
 			throw new RuntimeException("この社員番号は既に他の従業員に使用されています。");
 		}else{
 			Emp emp = new Emp();
+			emp.setId(id);
 			emp.setEnumber(form.getEnumber());
 			emp.setEname(form.getEname());
 			emp.setHireDate(form.getHireDate());
-			emp.setDeptId(Integer.parseInt(form.getDeptId()));
+			emp.setDeptId(form.getDeptId());
 			emp.setTelNumber(form.getTelNumber());
 			emp.setEmail(form.getEmail());
 			emp.setAddress(form.getAddress());
@@ -83,12 +85,19 @@ public class EmpServiceImpl implements EmpService {
 			
 			EmpDetail detail = new EmpDetail();
 			detail.setEmpId(emp.getId());
-			detail.setTelNumber(emp.getTelNumber());
-			detail.setEmail(emp.getEmail());
-			detail.setAddress(emp.getAddress());
+			detail.setTelNumber(form.getTelNumber());
+			detail.setEmail(form.getEmail());
+			detail.setAddress(form.getAddress());
 			
 			empDetailRepository.update(detail);
 		}
+	}
+
+	@Override
+	@Transactional
+	public void deleteEmp(int id) {
+		empDetailRepository.deleteByEmpId(id);
+		empRepository.delete(id);
 	}
 
 }

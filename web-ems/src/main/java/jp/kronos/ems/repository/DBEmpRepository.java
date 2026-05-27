@@ -51,12 +51,16 @@ public class DBEmpRepository implements EmpRepository {
 	@Override
 	public void update(Emp emp) {
 		empMapper.update(emp);
-		
 	}
 
 	@Override
 	public int countByEnumberExceptSelf(String enumber, int id) {
 		return empMapper.countByEnumberExceptSelf(enumber, id);
+	}
+
+	@Override
+	public void delete(int id) {
+		empMapper.delete(id);
 	}
 	
 	

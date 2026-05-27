@@ -52,6 +52,10 @@
 		.id-field {
 			background-color: #eee;
 		}
+
+		.notice-area {
+			color: red;
+		}
 	</style>
 </head>
 
@@ -60,13 +64,14 @@
 		<div th:replace="~{common/header :: header}"></div>
 	</header>
 	<div class="container">
-		<div class="notice-area" th:if="${error}" th:text="${error}"></div>
-		<h2>従業員更新</h2>
-		<form th:action="@{/employees/{deptId}/edit(deptId=${deptId})}" method="post" th:object="${empForm}">
+		<h2>従業員編集</h2>
+		<form th:action="@{/employees/{id}/edit(id=${id})}" method="post" th:object="${empForm}">
 			<div class="form-group">
 				<label>社員番号</label>
 				<input type="text" th:field="*{enumber}">
 				<div class="error" th:if="${#fields.hasErrors('enumber')}" th:errors="*{enumber}"></div>
+				<div class="notice-area" th:if="${error}" th:text="${error}"></div>
+
 			</div>
 			<div class="form-group">
 				<label>氏名</label>
@@ -95,7 +100,7 @@
 			</div>
 			<div class="form-group">
 				<label>メールアドレス</label>
-				<input type="email" th:field="*{email}">
+				<input type="text" th:field="*{email}">
 				<div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
 			</div>
 			<div class="form-group">
@@ -105,19 +110,11 @@
 			</div>
 			<div class="btn-area">
 				<button type="submit">更新</button>
-				<a th:href="@{/employees/{deptId}(deptId=${deptId})}">キャンセル</a>
+				<a th:href="@{/employees/{id}(id=${id})}">キャンセル</a>
 			</div>
 		</form>
 
 	</div>
 </body>
 
-</html><html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
 </html>

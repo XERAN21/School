@@ -10,7 +10,6 @@
 		<result property="deptId" column="DEPT_ID" />
 		<result property="dname" column="DNAME" />
 		<result property="telNumber" column="TEL_NUMBER" />
-		<result property="ename" column="ENAME" />
 		<result property="address" column="ADDRESS" />
 		<result property="email" column="EMAIL" />
 	</resultMap>
@@ -31,7 +30,8 @@
 		from
 		EMP e
 		join
-		DEPT d on e.DEPT_ID = d.ID
+		DEPT d on e.DEPT_ID
+		= d.ID
 		where
 		e.DEPT_ID = #{deptId}
 		order by
@@ -47,42 +47,54 @@
 	</select>
 	<select id="findById" resultMap="Emp">
 		select
-			e.ENUMBER,
-			e.ENAME,
-			e.HIRE_DATE,
-			e.DEPT_ID,
-			ed.TEL_NUMBER,
-			ed.EMAIL,
-			ed.ADDRESS
+		e.ENUMBER,
+		e.ENAME,
+		e.HIRE_DATE,
+		e.DEPT_ID,
+		ed.TEL_NUMBER,
+		ed.EMAIL,
+		ed.ADDRESS
 		from
 		EMP e
-		inner join emp_detail ed on e.ID = ed.EMP_ID
+		inner
+		join emp_detail ed on e.ID = ed.EMP_ID
 		where
 		e.ID = #{id}
 	</select>
 	<insert id="save" useGeneratedKeys="true" keyProperty="id">
-		insert into
-			EMP(
-			ENUMBER,
-			ENAME,
-			HIRE_DATE,
-			DEPT_ID
+		insert
+		into
+		EMP(
+		ENUMBER,
+		ENAME,
+		HIRE_DATE,
+		DEPT_ID
 		) VALUES (
-			#{enumber},
-			#{ename},
-			#{hireDate},
-			#{deptId}
+		#{enumber},
+		#{ename},
+		#{hireDate},
+		#{deptId}
 		)
 	</insert>
 	<update id="update">
-		update EMP(
-			set ENUMBER = #{enumber}
-			ENAME = #{ename}
-			HIRE_DATE = #{hireDate}
-			DEPT_ID = #{deptId}
-		)
+		UPDATE EMP
+		SET
+		ENUMBER = #{enumber},
+		ENAME = #{ename},
+		HIRE_DATE = #{hireDate},
+		DEPT_ID = #{deptId}
+		WHERE ID = #{id}
 	</update>
-	<select id="countByEnumberExceptSelf">
-		
+	<select id="countByEnumberExceptSelf" resultType="int">
+		select count(*)
+		from emp
+		where ENUMBER = #{enumber}
+		and ID = #{id}
 	</select>
+	<delete id="delete">
+		delete from
+		emp
+		where
+		ID = #{id}
+	</delete>
 </mapper>
