@@ -4,63 +4,16 @@
 <head>
 	<meta charset="UTF-8">
 	<title>従業員一覧</title>
-	<style>
-		body {
-			font-family: sans-serif;
-			margin: 40px;
-		}
-
-		.container {
-			width: 98%;
-		}
-
-		.notice-area {
-			text-align: center;
-			color: #2c5d63;
-			font-weight: bold;
-			margin: 10px 0;
-			padding: 10px;
-		}
-
-		table {
-			border-collapse: collapse;
-			width: 100%;
-			margin-top: 20px;
-		}
-
-		th,
-		td {
-			border: 1px solid #ccc;
-			padding: 8px;
-			text-align: left;
-		}
-
-		th {
-			background-color: #f2f2f2;
-		}
-
-		.header-area {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-		}
-
-		.action-area {
-			margin-top: 20px;
-			text-align: right;
-		}
-
-		.btn-group {
-			display: flex;
-			gap: 5px;
-		}
-	</style>
+	<link rel="stylesheet" th:href="@{/css/emp/list.css}">
+	<link rel="stylesheet" th:href="@{/css/common/themes.css}">
+	<script th:src="@{/js/emp/list.js}" defer></script>
 </head>
 
 <body>
-	<header class>
+	<header>
 		<div th:replace="~{common/header :: header}"></div>
 	</header>
+
 	<div class="container">
 		<h2>従業員一覧</h2>
 		<div class="notice-area" th:if="${notice}" th:text="${notice}"></div>
@@ -89,11 +42,12 @@
 						</form>
 					</td>
 					<td th:if="${session.loginUser.adminFlg == 1}">
-						<form method="post" th:action="@{/employees/{id}/delete(id=${emp.id})}" onsubmit="return confirm('本当に削除しますか？');">
+						<form method="post" th:action="@{/employees/{id}/delete(id=${emp.id})}"
+							onsubmit="return confirm('本当に削除しますか？');">
 							<button type="submit">削除</button>
 						</form>
 					</td>
-				</tr>
+					</tr>
 			</tbody>
 		</table>
 
@@ -102,7 +56,6 @@
 		</div>
 
 		<a th:href="@{/depts}">部署一覧</a>
-
 	</div>
 </body>
 

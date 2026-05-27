@@ -1,66 +1,14 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 	<meta charset="UTF-8">
 	<title>従業員更新</title>
-	<style>
-		body {
-			font-family: sans-serif;
-			margin: 40px;
-		}
-
-		.form-container {
-			width: 400px;
-		}
-
-		.form-group {
-			margin-bottom: 15px;
-		}
-
-		label {
-			display: block;
-			font-size: 0.9rem;
-			margin-bottom: 5px;
-		}
-
-		input,
-		textarea {
-			width: 100%;
-			padding: 8px;
-			box-sizing: border-box;
-		}
-
-		select {
-			width: 100%;
-			padding: 8px;
-			box-sizing: border-box;
-		}
-
-		.btn-area {
-			margin-top: 20px;
-			display: flex;
-			gap: 10px;
-		}
-
-		.error {
-			color: red;
-			font-size: 0.8rem;
-		}
-
-		.id-field {
-			background-color: #eee;
-		}
-
-		.notice-area {
-			color: red;
-		}
-	</style>
+	<link rel="stylesheet" th:href="@{/css/emp/edit.css}">
 </head>
 
 <body>
-	<header class>
+	<header>
 		<div th:replace="~{common/header :: header}"></div>
 	</header>
 	<div class="container">
@@ -71,7 +19,6 @@
 				<input type="text" th:field="*{enumber}">
 				<div class="error" th:if="${#fields.hasErrors('enumber')}" th:errors="*{enumber}"></div>
 				<div class="notice-area" th:if="${error}" th:text="${error}"></div>
-
 			</div>
 			<div class="form-group">
 				<label>氏名</label>
@@ -90,7 +37,6 @@
 					<option th:each="dept :${depts}" th:value="${dept.id}" th:text="${dept.dname}"></option>
 				</select>
 				<div class="error" th:if="${#fields.hasErrors('deptId')}" th:errors="*{deptId}"></div>
-
 			</div>
 			<div class="form-group">
 				<label>電話番号</label>
@@ -100,7 +46,7 @@
 			</div>
 			<div class="form-group">
 				<label>メールアドレス</label>
-				<input type="text" th:field="*{email}">
+				<input type="email" th:field="*{email}">
 				<div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
 			</div>
 			<div class="form-group">
@@ -110,10 +56,9 @@
 			</div>
 			<div class="btn-area">
 				<button type="submit">更新</button>
-				<a th:href="@{/employees/{id}(id=${id})}">キャンセル</a>
+				<a th:href="@{/employees/{id}(id=${deptId})}">キャンセル</a>
 			</div>
 		</form>
-
 	</div>
 </body>
 

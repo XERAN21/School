@@ -1,0 +1,132 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background: linear-gradient(135deg, #8EC1D6 0%, #263141 100%);
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+	padding: 20px;
+}
+
+.container {
+	width: 100%;
+	max-width: 380px;
+	background: #FFFFFF;
+	border-radius: 16px;
+	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 5px 15px rgba(0, 0, 0, 0.1);
+	padding: 40px 35px;
+	transition: transform 0.3s ease;
+}
+
+.container:hover {
+	transform: translateY(-5px);
+}
+
+h3 {
+	color: #263141;
+	font-size: 1.8rem;
+	font-weight: 600;
+	text-align: center;
+	margin-bottom: 30px;
+	letter-spacing: 1px;
+}
+
+.form-group {
+	margin-bottom: 22px;
+}
+
+label {
+	display: block;
+	color: #3D4B5F;
+	font-size: 0.85rem;
+	font-weight: 500;
+	margin-bottom: 8px;
+	letter-spacing: 0.5px;
+}
+
+input {
+	width: 100%;
+	padding: 12px 14px;
+	border: 2px solid #CBD5E1;
+	border-radius: 8px;
+	font-size: 14px;
+	transition: all 0.3s ease;
+	outline: none;
+	font-family: inherit;
+	box-sizing: border-box;
+}
+
+input:focus {
+	border-color: #8EC1D6;
+	box-shadow: 0 0 0 3px rgba(142, 193, 214, 0.2);
+}
+
+input:hover {
+	border-color: #8799AF;
+}
+
+button {
+	width: 100%;
+	background: #263141;
+	color: #FFFFFF;
+	border: none;
+	padding: 12px;
+	border-radius: 8px;
+	font-size: 16px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	margin-top: 10px;
+	font-family: inherit;
+	letter-spacing: 1px;
+}
+
+button:hover {
+	background: #3D4B5F;
+	transform: translateY(-2px);
+	box-shadow: 0 5px 15px rgba(38, 49, 65, 0.3);
+}
+
+button:active {
+	transform: translateY(0);
+}
+
+.error {
+	color: #dc3545;
+	font-size: 0.75rem;
+	margin-top: 6px;
+	padding-left: 5px;
+}
+
+/* グローバルエラー表示用 */
+.container>.error {
+	background: #fee;
+	border-left: 4px solid #dc3545;
+	padding: 12px;
+	border-radius: 8px;
+	margin-bottom: 20px;
+	color: #dc3545;
+	font-size: 0.85rem;
+}
+
+/* 簡単な装飾 */
+.form-group:last-of-type {
+	margin-bottom: 10px;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 480px) {
+	.container {
+		padding: 30px 25px;
+	}
+
+	h3 {
+		font-size: 1.5rem;
+	}
+}

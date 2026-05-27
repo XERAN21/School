@@ -196,9 +196,8 @@ public class EmpController {
 		}
 		
 		ra.addFlashAttribute("notice", "「従業員情報を更新しました。」");
-		ra.addAttribute("deptId", form.getDeptId());
 		 
-		return "redirect:/employees/{deptId}";
+		return "redirect:/employees/" + form.getDeptId();
 	}
 	
 	@PostMapping("/{id}/delete")

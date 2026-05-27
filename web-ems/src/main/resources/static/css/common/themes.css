@@ -1,0 +1,26 @@
+.theme-blue {
+	--brand-color: #8599B6;
+	--darkest-color: #263141;
+	--dark-color: #3D4B5F;
+	--mid-color: #8799AF;
+	--light-color: #CBD5E1;
+	--lightest-color: #FFFFFF;
+}
+
+.theme-green {
+	--brand-color: #7EA951;
+	--darkest-color: #2C3128;
+	--dark-color: #575F51;
+	--mid-color: #A6B695;
+	--light-color: #DAE3D1;
+	--lightest-color: #FFFFFF;
+}
+
+.theme-purple {
+	--brand-color: #8F8AC0;
+	--darkest-color: #0C121C;
+	--dark-color: #1E293B;
+	--mid-color: #B8BFC6;
+	--light-color: #D6DEE7;
+	--lightest-color: #FFFFFF;
+}
