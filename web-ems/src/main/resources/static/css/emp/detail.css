@@ -1,33 +1,34 @@
 body {
 	font-family: sans-serif;
 	margin: 40px;
-	background-color: #F5F7FA;
+	background-color: var(--darkest-color);
+	transition: all 0.3s ease;
 }
-
+/* Detail Container */
 .container {
 	width: 98%;
 	max-width: 800px;
 	margin: 0 auto;
-	background: #FFFFFF;
+	background: var(--dark-color);
 	border-radius: 12px;
 	padding: 20px;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 h2 {
-	color: #263141;
-	border-bottom: 3px solid #8EC1D6;
+	color: var(--brand-color);
+	border-bottom: 3px solid var(--brand-color);
 	padding-bottom: 10px;
 	margin-bottom: 20px;
 }
 
 .notice-area {
 	text-align: center;
-	color: #2c5d63;
+	color: var(--lightest-color);
 	font-weight: bold;
 	margin: 10px 0;
 	padding: 10px;
-	background-color: #e8f4f5;
+	background-color: var(--mid-color);
 	border-radius: 6px;
 }
 
@@ -35,56 +36,47 @@ table {
 	border-collapse: collapse;
 	width: 100%;
 	margin-top: 20px;
-	background-color: #FFFFFF;
+	background-color: var(--dark-color);
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
 }
 
 th,
 td {
-	border: 1px solid #CBD5E1;
+	border: 1px var(--mid-color);
 	padding: 12px;
 	text-align: left;
 }
 
 th {
-	background-color: #37476C;
-	color: #FFFFFF;
+	background-color: var(--darkest-color);
+	color: var(--brand-color);
 	font-weight: 600;
 	width: 30%;
 }
 
 td {
-	color: #3D4B5F;
-}
-
-.header-area {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.action-area {
-	margin-top: 20px;
-	text-align: right;
-}
-
-.btn-group {
-	display: flex;
-	gap: 5px;
+	color: var(--lightest-color);
+	background-color: var(--dark-color);
 }
 
 a {
 	display: inline-block;
 	margin-top: 20px;
-	background-color: #8EC1D6;
-	color: #263141;
+	background-color: var(--brand-color);
+	color: var(--darkest-color);
 	padding: 10px 20px;
 	text-decoration: none;
 	border-radius: 6px;
 	font-weight: bold;
 	transition: all 0.3s ease;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
 }
 
 a:hover {
-	background-color: #263141;
-	color: #FFFFFF;
+	background-color: var(--mid-color);
+	color: var(--darkest-color);
 }

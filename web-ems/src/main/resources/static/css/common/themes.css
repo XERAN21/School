@@ -1,19 +1,22 @@
 .theme-blue {
-	--brand-color: #8599B6;
-	--darkest-color: #263141;
-	--dark-color: #3D4B5F;
-	--mid-color: #8799AF;
-	--light-color: #CBD5E1;
+	--brand-color: #F29559;
+	--darkest-color: #202C39;
+	--dark-color: #283845;
+	--mid-color: #8197A9;
+	--light-color: #D1DEE9;
 	--lightest-color: #FFFFFF;
+	--delete:#DA6464;
 }
 
 .theme-green {
-	--brand-color: #7EA951;
-	--darkest-color: #2C3128;
-	--dark-color: #575F51;
-	--mid-color: #A6B695;
-	--light-color: #DAE3D1;
+	--brand-color: #BFCF90;
+	--darkest-color: #29323E;
+	--dark-color: #455161;
+	--mid-color: #C0C8D4;
+	--light-color: #ECF1DF;
 	--lightest-color: #FFFFFF;
+	--delete:#DA6464;
+
 }
 
 .theme-purple {
@@ -23,4 +26,6 @@
 	--mid-color: #B8BFC6;
 	--light-color: #D6DEE7;
 	--lightest-color: #FFFFFF;
+	--delete:#DA6464;
+
 }

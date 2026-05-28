@@ -1,23 +1,21 @@
+/* Header Styles */
 .header-container {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	background: linear-gradient(135deg, #263141 0%, #3D4B5F 100%);
-	color: #FFFFFF;
+	background: linear-gradient(135deg, var(--darkest-color) 0%, var(--dark-color) 100%);
+	color: var(--brand-color);
 	padding: 5px 20px;
-	width: 95%;
+	width: 98%;
+	height: 40px;
 	border-radius: 8px;
 	margin-bottom: 20px;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.header-left {
-	font-size: 1.2rem;
-	font-weight: bold;
-}
-
 .header-left strong {
-	color: #8EC1D6;
+	color: var(--brand-color);
+	font-size: 1.2rem;
 	letter-spacing: 1px;
 }
 
@@ -29,7 +27,38 @@
 }
 
 .header-right span {
-	color: #CBD5E1;
+	color: var(--brand-color);
+}
+
+.theme-buttons {
+	display: flex;
+	gap: 8px;
+}
+
+.theme-btn {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;	
+	cursor: pointer;
+	transition: all 0.3s ease;
+	border: none;
+}
+
+.theme-btn:hover {
+	transform: scale(1.1);
+	background-color: var(--brand-color);
+}
+
+.theme-blue-btn {
+	background-color: #F29559;
+}
+
+.theme-green-btn {
+	background-color: #BFCF90;
+}
+
+.theme-red-btn {
+	background-color: #8F8AC0;
 }
 
 .header-right form {
@@ -37,8 +66,8 @@
 }
 
 .header-right input[type="submit"] {
-	background-color: #8EC1D6;
-	color: #263141;
+	background-color: var(--brand-color);
+	color: var(--darkest-color);
 	border: none;
 	padding: 6px 16px;
 	border-radius: 6px;
@@ -48,41 +77,8 @@
 }
 
 .header-right input[type="submit"]:hover {
-	background-color: #FFFFFF;
-	color: #263141;
-	transform: translateY(-1px);
-}
-
-.theme-buttons {
-	display: flex;
-	gap: 5px;
-	margin-right: 10px;
-}
-
-.theme-btn {
-	width: 35px;
-	height: 35px;
-	border-radius: 50%;
-	border: 2px solid white;
-	cursor: pointer;
-	font-size: 16px;
-	transition: all 0.3s ease;
-}
-
-.theme-btn:hover {
-	transform: scale(1.1);
-}
-
-.theme-blue-btn {
-	background-color: #8EC1D6;
-}
-
-.theme-green-btn {
-	background-color: #7EA951;
-}
-
-.theme-red-btn {
-	background-color: #8F8AC0;
+	background-color: var(--lightest-color);
+	color: var(--darkest-color);
 }
 
 @media (max-width: 768px) {
