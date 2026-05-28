@@ -1,21 +1,22 @@
 body {
 	font-family: sans-serif;
 	margin: 40px;
-	background-color: #F5F7FA;
+	background-color: var(--darkest-color);
+	transition: all 0.3s ease;
 }
-
+/* Form Container */
 .container {
 	max-width: 500px;
 	margin: 0 auto;
-	background: #FFFFFF;
+	background: var(--dark-color);
 	border-radius: 12px;
 	padding: 30px;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 h2 {
-	color: #263141;
-	border-bottom: 3px solid #8EC1D6;
+	color: var(--brand-color);
+	border-bottom: 3px solid var(--brand-color);
 	padding-bottom: 10px;
 	margin-bottom: 20px;
 }
@@ -26,7 +27,7 @@ h2 {
 
 label {
 	display: block;
-	color: #3D4B5F;
+	color: var(--light-color);
 	font-size: 0.9rem;
 	font-weight: 500;
 	margin-bottom: 8px;
@@ -37,10 +38,12 @@ textarea,
 select {
 	width: 100%;
 	padding: 10px;
-	border: 2px solid #CBD5E1;
+	border: 2px solid var(--mid-color);
 	border-radius: 6px;
 	box-sizing: border-box;
 	font-family: inherit;
+	background-color: var(--lightest-color);
+	color: var(--darkest-color);
 	transition: all 0.3s ease;
 }
 
@@ -48,8 +51,8 @@ input:focus,
 select:focus,
 textarea:focus {
 	outline: none;
-	border-color: #8EC1D6;
-	box-shadow: 0 0 0 3px rgba(142, 193, 214, 0.2);
+	border-color: var(--brand-color);
+	box-shadow: 0 0 0 3px rgba(133, 153, 182, 0.2);
 }
 
 .btn-area {
@@ -59,8 +62,8 @@ textarea:focus {
 }
 
 button {
-	background-color: #8EC1D6;
-	color: #263141;
+	background-color: var(--brand-color);
+	color: var(--darkest-color);
 	border: none;
 	padding: 10px 20px;
 	border-radius: 6px;
@@ -70,14 +73,14 @@ button {
 }
 
 button:hover {
-	background-color: #263141;
-	color: #FFFFFF;
+	background-color: var(--lightest-color);
+	color: var(--darkest-color);
 	transform: translateY(-2px);
 }
 
 .btn-area a {
-	background-color: #3D4B5F;
-	color: #FFFFFF;
+	background-color: var(--mid-color);
+	color: var(--lightest-color);
 	padding: 10px 20px;
 	border-radius: 6px;
 	text-decoration: none;
@@ -87,7 +90,8 @@ button:hover {
 }
 
 .btn-area a:hover {
-	background-color: #263141;
+	background-color: var(--lightest-color);
+	color: var(--darkest-color);
 	transform: translateY(-2px);
 }
 
@@ -104,6 +108,6 @@ button:hover {
 }
 
 input:disabled {
-	background-color: #f0f0f0;
-	color: #666;
+	background-color: var(--light-color);
+	color: var(--dark-color);
 }

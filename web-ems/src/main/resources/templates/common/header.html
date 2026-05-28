@@ -10,7 +10,6 @@
 		<div class="header-right" th:if="${session.loginUser != null}">
 			<span th:text="|${session.loginUser.name} でログイン中|"></span>
 			
-			<!-- テーマ切り替えボタン -->
 			<div class="theme-buttons">
 				<button class="theme-btn theme-blue-btn" onclick="setTheme('blue')"></button>
 				<button class="theme-btn theme-green-btn" onclick="setTheme('green')"></button>
@@ -25,21 +24,15 @@
 	
 	<script>
 		function setTheme(theme) {
-			// 既存のテーマクラスを削除
 			document.body.classList.remove('theme-blue', 'theme-green', 'theme-purple');
-			// 新しいテーマクラスを追加
 			document.body.classList.add('theme-' + theme);
-			// ローカルストレージに保存
 			localStorage.setItem('selectedTheme', theme);
 		}
-		
-		// Load saved theme on page load
 		document.addEventListener('DOMContentLoaded', function() {
 			const savedTheme = localStorage.getItem('selectedTheme');
 			if (savedTheme) {
 				document.body.classList.add('theme-' + savedTheme);
 			} else {
-				// No saved theme, apply default (blue)
 				document.body.classList.add('theme-blue');
 			}
 		});

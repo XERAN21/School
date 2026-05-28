@@ -4,11 +4,11 @@
 <head>
 	<meta charset="UTF-8">
 	<title>ログイン</title>
-	<link rel="stylesheet" th:href="@{/css/login/login.css}">}
+	<link rel="stylesheet" th:href="@{/css/login/login.css}">
+	<link rel="stylesheet" href="/css/common/themes.css">
 </head>
 
 <body>
-
 	<div class="container">
 		<h3>従業員管理システム</h3>
 
@@ -17,13 +17,14 @@
 		<form th:action="@{/login}" th:object="${loginForm}" method="post">
 			<div class="form-group">
 				<label>ユーザーID</label><br>
-				<input type="text" th:field="*{userId}"  maxlength="30" />
+				<input id="user" type="text" th:field="*{userId}" maxlength="30" placeholder="ユーザIDを入力してください" />
 				<div class="error" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></div>
 			</div>
 
 			<div class="form-group">
 				<label>パスワード</label><br>
-				<input type="password" th:field="*{password}"  maxlength="30" />
+				<input id="password" type="password" th:field="*{password}" maxlength="30"
+					placeholder="パスワードを入力してください" />
 				<div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
 			</div>
 

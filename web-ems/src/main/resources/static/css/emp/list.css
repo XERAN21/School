@@ -2,48 +2,57 @@ body {
 	font-family: sans-serif;
 	margin: 40px;
 	background-color: var(--darkest-color);
+	transition: all 0.3s ease;
 }
 
+/* Container Styles */
 .container {
 	width: 98%;
-	max-width: 1400px;
+	max-width: 1200px;
 	margin: 0 auto;
 	background: var(--dark-color);
 	border-radius: 12px;
 	padding: 20px;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .notice-area {
 	text-align: center;
-	color: var(--dark-color);
+	color: var(--lightest-color);
 	font-weight: bold;
 	margin: 10px 0;
 	padding: 10px;
-	background-color: var(--light-color);
+	background-color: var(--mid-color);
 	border-radius: 6px;
 }
 
-h2 {
-	color: var(--lightest-color);
+.head {
+	display: flex;
+	align-items: center;
+	gap: 10px;
 	border-bottom: 3px solid var(--brand-color);
-	padding-bottom: 10px;
-	margin-bottom: 20px;
+
+}
+
+h2 {
+	color: var(--brand-color);
 }
 
 table {
 	border-collapse: collapse;
 	width: 100%;
 	margin-top: 20px;
-	background-color: var(--lightest-color);
-	border-radius: 12px;
+	background-color: var(--dark-color);
+	border-radius: 10px;
+	overflow: hidden;
+	box-shadow: 0 5px 15px rgba(0, 0, 0.2, 0.25);
+
 }
 
 th,
 td {
-	border: 1px solid var(--mid-color);
 	padding: 12px 8px;
-	text-align: left;
+	text-align: center;
 }
 
 th {
@@ -52,8 +61,19 @@ th {
 	font-weight: 600;
 }
 
+tr {
+	background-color: var(--dark-color);
+	color: var(--lightest-color);
+}
+
 tr:hover {
-	background-color: var(--light-color);
+	background-color: var(--mid-color);
+	color: var(--darkest-color);
+	font-weight: bold
+}
+
+tr:hover a{
+	color: var(--darkest-color);
 }
 
 .action-area {
@@ -73,14 +93,15 @@ tr:hover {
 }
 
 .action-area a:hover {
-	background-color: var(--darkest-color);
-	color: var(--lightest-color);
+	background-color: var(--mid-color);
+	color: var(--darkest-color);
 }
 
 button {
-	background-color: var(--dark-color);
+	background-color: var(--mid-color);
 	color: var(--lightest-color);
 	border: none;
+	width: 80px;
 	padding: 6px 12px;
 	border-radius: 4px;
 	cursor: pointer;
@@ -89,37 +110,51 @@ button {
 }
 
 button:hover {
-	background-color: var(--darkest-color);
+	background-color: var(--brand-color);
+	color: var(--darkest-color);
 	transform: translateY(-1px);
 }
 
 /* 編集ボタン */
 form[method="get"] button {
-	background-color: var(--brand-color);
-	color: var(--darkest-color);
+	background-color: var(--dark-color);
+	border: 2px solid var(--brand-color);
+	color: var(--lightest-color);
+	font-weight: bold;
+
 }
 
 form[method="get"] button:hover {
-	background-color: var(--darkest-color);
-	color: var(--lightest-color);
+	background-color: var(--brand-color);
+	color: var(--darkest-color);
+	font-weight: bold;
+
 }
 
 /* 削除ボタン */
 form[method="post"] button {
-	background-color: #dc3545;
+	background-color: var(--dark-color);
+	color: var(--light-color);
+	font-weight: bold;
+	border: 1px solid var(--lightest-color);
+
 }
 
 form[method="post"] button:hover {
-	background-color: #bb2d3b;
+	background-color: var(--dark-color);
+	color: var(--light-color);
+	font-weight: bold;
+
 }
 
 a {
-	color: var(--dark-color);
+	color: var(--lightest-color);
 	text-decoration: none;
+	font-weight: bold;
 }
 
 a:hover {
-	color: var(--brand-color);
+	color: var(--lightest-color);
 	text-decoration: underline;
 }
 
@@ -127,21 +162,21 @@ a:hover {
 	text-align: center;
 	color: #dc3545;
 	padding: 20px;
-	background-color: #f8d7da;
+	background-color: var(--light-color);
 	border-radius: 6px;
 	margin-top: 20px;
 }
 
 /* 部署一覧リンク */
-.container > a {
+.container>a {
 	display: inline-block;
 	margin-top: 20px;
 	color: var(--brand-color);
 	font-weight: bold;
 }
 
-.container > a:hover {
-	color: var(--darkest-color);
+.container>a:hover {
+	color: var(--lightest-color);
 }
 
 @media (max-width: 768px) {
