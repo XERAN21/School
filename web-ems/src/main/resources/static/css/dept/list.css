@@ -67,6 +67,13 @@ tr {
 
 tr:hover {
 	background-color: var(--mid-color);
+	color: var(--darkest-color);
+	font-weight: bold
+
+}
+
+tr:hover a{
+	color: var(--darkest-color);
 }
 
 .action-area {
