@@ -18,11 +18,10 @@ body {
 
 .notice-area {
 	text-align: center;
-	color: var(--lightest-color);
+	color: var(--brand-color);
 	font-weight: bold;
 	margin: 10px 0;
 	padding: 10px;
-	background-color: var(--mid-color);
 	border-radius: 6px;
 }
 
