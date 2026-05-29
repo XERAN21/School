@@ -61,7 +61,7 @@ public class EmpServiceImpl implements EmpService {
 	public void saveEmp(EmpForm form) {
 		int count = empRepository.countByEnumber(form.getEnumber());
 
-		if (count > 1) {
+		if (count >= 1) {
 			throw new RuntimeException("この社員番号は既に登録されてます。");
 		} else {
 			Emp emp = new Emp();
